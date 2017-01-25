@@ -1,17 +1,29 @@
 #!/usr/bin/python2.7
 
-import webuntis
+import argparse
 import datetime
+
 import telebot
+import webuntis
 from telebot import types
 
-bot = telebot.TeleBot("TOKEN")
+parser = argparse.ArgumentParser()
+parser.add_argument('-u', '--url', type=str, help='server to connect to', dest='url')
+parser.add_argument('-n', '--user-name', type=str, help='user name', dest='user')
+parser.add_argument('-p', '--password', type=str, help='password', dest='pw')
+parser.add_argument('-s', '--school', type=str, help='schoolname', dest='school')
+parser.add_argument('-t', '--token', type=str, help='telegram token', dest='token')
+args = parser.parse_args()
+
+bot = telebot.TeleBot(args.token)
+
+print(args.url)
 
 s = webuntis.Session(
-	server='url',
-	username='',
-	password='',
-	school='',
+	server=args.url,
+	username=args.user,
+	password=args.pw,
+	school=args.school,
 	useragent='Pyton Stundenplan pull Script'
 )
 
@@ -37,7 +49,8 @@ def send_tmorrow(message):
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
 	print(message.from_user.username)
-	bot.send_message(message.chat.id, "Fuer Stundenplan von Heute: /today\nFuer Stundenplan von Morgen: #/tomorrow\nFuer eine Liste aller Klassen: /list_klass")
+	bot.send_message(message.chat.id, "Fuer Stundenplan von Heute: /today\nFuer Stundenplan von Morgen: /tomorrow\n"
+									  "Fuer eine Liste aller Klassen: /list_klass")
 
 def list_klass():
 	try:
@@ -148,7 +161,7 @@ def pol():
 	try:
 		bot.polling()
 	except Exception as e:
-		print(e)		
+		print(e)
 		pol()
 pol()
 #def klassen_to_string(kla)
