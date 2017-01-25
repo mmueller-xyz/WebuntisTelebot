@@ -2,7 +2,6 @@
 
 import argparse
 import datetime
-
 import telebot
 import webuntis
 from telebot import types

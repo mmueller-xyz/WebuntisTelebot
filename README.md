@@ -1,3 +1,3 @@
 # WebuntisTelebot
 A Telegram bot used to view a classes timetable.
-Just pip the dependencies.
+Just pip pyTelegramBotAPI and webuntis.
