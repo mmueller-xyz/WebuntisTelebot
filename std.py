@@ -1,7 +1,8 @@
-#!/usr/bin/python2.7
+#!/usr/bin/python3.5
 
 import argparse
 import datetime
+
 import telebot
 import webuntis
 from telebot import types
@@ -95,18 +96,20 @@ def periods_to_string(pers):
 	st += ''
 	return st
 
-def room_to_string(rom):
-	return '' + rom.name + ''
 
-def rooms_to_string(roml):
+def room_to_string(room):
+	return '' + room.name + ''
+
+
+def rooms_to_string(rooml):
 	st = ''
 	f = 0
-	for rom in roml:
+	for room in rooml:
 		if not f==0:
 			st += ', '
 		else:
 			f=1
-		st += room_to_string(rom)
+		st += room_to_string(room)
 	st += ''
 	return st
 
